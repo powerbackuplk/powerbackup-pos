@@ -1,0 +1,13 @@
+// Check config on load
+window.addEventListener('DOMContentLoaded', async () => {
+    if (window.electronAPI) {
+        const result = await window.electronAPI.loadConfig();
+        if (result.success) {
+            window.businessConfig = result.config;
+            // Update receipt with config
+            document.getElementById('receipt-business-name').textContent = result.config.businessName;
+            document.getElementById('receipt-address').textContent = result.config.address;
+            document.getElementById('receipt-phone').textContent = result.config.phone;
+        }
+    }
+});
